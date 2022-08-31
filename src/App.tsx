@@ -5,8 +5,8 @@ import { SearchDrink } from './components';
 export const App: FC = () => {
 
   return (
-    <div className="font-mono bg-gray-800 w-full h-screen text-slate-400">
-      <h1>Hello World</h1>
+    <div className="font-mono bg-slate-100 w-full 
+    min-h-screen text-slate-600 p-4">
       <SearchDrink />
     </div>
   );
