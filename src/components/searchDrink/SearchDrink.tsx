@@ -9,10 +9,12 @@ export const SearchDrink: FC = () => {
   const [value, setValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [drinksList, setDrinksList] = useState(initialDrinksList);
+  const [drinksList, setDrinksList] = useState<Drink[] | null>(initialDrinksList);
 
   const handleDrinkSearch: FormEventHandler = (e) => {
     e.preventDefault();
+    if (value === '') return;
+
     setIsLoading(true);
 
     drinksService.get(value)
@@ -36,7 +38,7 @@ export const SearchDrink: FC = () => {
   const DrinkList = () => {
     return (
       <div className="space-y-8">
-        {drinksList.map(drink => {
+        {drinksList?.map(drink => {
           return (
             <div
               className="shadow-md p-6 bg-slate-50 rounded-xl space-y-4"
@@ -80,9 +82,9 @@ export const SearchDrink: FC = () => {
       </form>
 
       {isLoading && <h2>...isLoading</h2>}
-      {!isLoading && !error && drinksList.length > 0 && <DrinkList />}
-      {!isLoading && !error && drinksList.length === 0 && <h2>No drinks available</h2>}
-      {error && !isLoading && <h2>{error}</h2>}
+      {!isLoading && !error && drinksList && <DrinkList />}
+      {!isLoading && !error && !drinksList && <h2>No drinks available</h2>}
+      {error && !isLoading && <h2>Service is not available</h2>}
     </div>
   );
 };

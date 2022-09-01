@@ -22,7 +22,7 @@ export interface Drink {
 class DrinksService {
   apiUrl = import.meta.env.VITE_DRINKS_API;
 
-  async get(drinkQuery: string): Promise<Drink[]> {
+  async get(drinkQuery: string): Promise<Drink[] | null> {
     return new Promise((resolve, reject) => {
       axios.get(this.apiUrl, {
         params: {
