@@ -108,8 +108,6 @@ describe('<SearchDrink />', () => {
       userEv.type(searchInput, '{enter}');
     });
 
-    screen.debug();
-
     expect(screen.queryByRole('heading'))
       .not.toBeInTheDocument();
 
